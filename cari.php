@@ -1,7 +1,15 @@
 <?php 
 
-    if(!$argv[1]){
-        print " use: php cari.php https://site.com/ \n";
+/*
+tools ini di gunakan buat cari admin login ya biar ez hwhwh 
+release : 26 mei 2018
+author  : galehdotid
+thnx    : IndoXploit - Sanjungan Jiwa - SukabumiBlackHat  - All indonesia Hacker 
+
+*/
+error_reporting(0);
+if(!$argv[1]){
+        print "use: php cari.php https://site.com/";
         exit(1);
     }else{
         $site = $argv[1];
@@ -248,16 +256,16 @@
                        'sysadmin/'
                        );
 
-    foreach($cariadmin as $cari){
-        $url = $site.$cari;
-        $return = get_headers($url);
-        if(eregi('200', $return[0] )){
-            print "Di temukan =>  ".$url."\n";
-            print "Thanks dah Make ni tools \n";
-            print "... \n";
-            exit(1);
-        }else{
-            print"Tidak di temukan =>".$url."\n";
-        }  
+
+    foreach ($cariadmin as $key) {
+        $url = $site.$key;
+        $response = get_headers($url);
+         if(eregi('200', $response[0])){
+            print "Di temukan => ".$url."\n";
+            print "Thnx for use this tools \n";
+            exit();
+         }else{
+            print "Tidak di temukan => ".$url."\n";
+         }
     }
 ?>
