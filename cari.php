@@ -1,12 +1,11 @@
 <?php 
 
-/*
-tools ini di gunakan buat cari admin login ya biar ez hwhwh 
-release : 26 mei 2018
-author  : galehdotid
-thnx    : IndoXploit - Sanjungan Jiwa - SukabumiBlackHat  - All indonesia Hacker 
-
-*/
+/**
+ * Admin finder Scanner | galehdotid
+ * thx   : Indoxploit - xaisyndicate - all indonesia Hacker Rulez
+ * Open Result : admin-login.txt !
+ * Usage :  Usage : php admin http://site.com/
+ */
 error_reporting(0);
 if(!$argv[1]){
         print "use: php cari.php https://site.com/";
@@ -256,16 +255,19 @@ if(!$argv[1]){
                        'sysadmin/'
                        );
 
-
     foreach ($cariadmin as $key) {
         $url = $site.$key;
-        $response = get_headers($url);
-         if(eregi('200', $response[0])){
-            print "Di temukan => ".$url."\n";
-            print "Thnx for use this tools \n";
-            exit();
-         }else{
-            print "Tidak di temukan => ".$url."\n";
-         }
+        file_get_contents($url);
+        if(preg_match('/200/i', $http_response_header[0])){
+          echo "[+] Di Temukan admin login -> {$url}\n";
+          echo "[*] Sedang melakukan Scanning Please wait ...\n";
+          //save
+          $file = fopen("admin-login.txt", "w");
+                  fwrite($file, $url . "\r\n");
+                  fclose($file);
+          sleep(4);
+        }else{
+           echo "[-] Not Found -> {$url}\n";
+        }
     }
 ?>
